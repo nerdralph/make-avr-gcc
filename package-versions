@@ -1,7 +1,7 @@
 #
 #Define # of cores for make; > 1 can cause concurrency problems on MinGW
 #
-Cores=1
+Cores=4
 
 #
 #Define versions
