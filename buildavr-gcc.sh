@@ -318,6 +318,8 @@ function buildandinstall()
 
    # strip all the binaries
    find $prefix -type d -name bin -exec find \{\} -type f \; | xargs strip > /dev/null 2>&1
+   strip /usr/local/avr/libexec/gcc/avr/5.1.0/c*
+   strip /usr/local/avr/libexec/gcc/avr/5.1.0/lto*
 
    cecho "\n"
    cecho "${cyan}installation of ${target} GNU tools complete\n"
