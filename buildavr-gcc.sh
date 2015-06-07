@@ -246,9 +246,8 @@ function buildandinstall()
    cd ../../build/${gcccore}
 
    echo "($0) configuring GCC source"
-   ../../source/${gccbase}/configure -v ${commonconfig} -fuse-linker-plugin\
+   ../../source/${gccbase}/configure -v ${commonconfig} --enable-lto\
       --enable-languages="c,c++"
-#      --with-gnu-ld --with-gnu-as --prefix=$prefix --enable-languages="c,c++" --with-dwarf2 
    cerror "GCC configuration failed"
 
 #  Hack to prevent docs to be build , it will fail if texinfo is v5.xx (as in Mint 17)
