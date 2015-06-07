@@ -147,7 +147,7 @@ function buildandinstall()
    cd ../../build/${binutilsbase}
 
    echo "($0) configuring binutils source"
-   ../../source/${binutilsbase}/configure -v ${commonconfig} \
+   ../../source/${binutilsbase}/configure -v ${commonconfig} --enable-plugins\
       --enable-install-libbfd --disable-werror CFLAGS="-Wno-format-security "
    cerror "binutils configuration failed"
 
@@ -246,7 +246,7 @@ function buildandinstall()
    cd ../../build/${gcccore}
 
    echo "($0) configuring GCC source"
-   ../../source/${gccbase}/configure -v ${commonconfig} \
+   ../../source/${gccbase}/configure -v ${commonconfig} -fuse-linker-plugin\
       --enable-languages="c,c++"
 #      --with-gnu-ld --with-gnu-as --prefix=$prefix --enable-languages="c,c++" --with-dwarf2 
    cerror "GCC configuration failed"
