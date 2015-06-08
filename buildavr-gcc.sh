@@ -148,15 +148,17 @@ function buildandinstall()
 
    echo "($0) configuring binutils source"
    ../../source/${binutilsbase}/configure -v ${commonconfig} --enable-plugins\
-      --enable-install-libbfd --disable-werror CFLAGS="-Wno-format-security "
+      --disable-werror CFLAGS="-Wno-format-security "
    cerror "binutils configuration failed"
 
 #  Hack to prevent docs to be build , it will fail if texinfo is v5.xx (as in Mint 17)
 #   echo "MAKEINFO = :" >> Makefile 
 
    echo "($0) building binutils"
-   make -j${Cores} all 
+   make -j${Cores} configure-host 
+   make -j${Cores} all LDFLAGS=-all-static 
    make install clean
+   #make -j${Cores} install clean
    cerror "binutils build failed"
    touch ${base}/ok-build-${binutilsbase}
    fi
@@ -254,9 +256,9 @@ function buildandinstall()
 #   echo "MAKEINFO = :" >> Makefile 
 
    echo "($0) building GCC"
-#   make all install clean LANGUAGES="c obj-c++"
-   make -j${Cores} all LANGUAGES="c c++"
-   make install clean
+   #make -j${Cores} all LANGUAGES="c c++" LDFLAGS=-static
+   make LDFLAGS=-static -j${Cores} all LANGUAGES="c c++"
+   make -j${Cores} install clean
    cerror "GCC build failed"
    touch ${base}/ok-build-${gccbase}
    fi
